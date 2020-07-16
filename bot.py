@@ -12,7 +12,11 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
+
+# Declaramos algunas variables necesarias para el Bot
+PORT = int(os.environ.get('PORT', 5000))
 SECRET_KEY = os.getenv("TELEGRAM_BOT_API_KEY")
+HEROKU_APP = os.getenv("HEROKU_APP")
 
 # Definimos algunos comandos básicos que funcionaran como handlers.
 
@@ -43,7 +47,11 @@ def main():
 
     # Corre el bot hasta que se presione CTRL+C o el proceso reciba un SIGINT,
     # SIGTERM o SIGABRT.
-    updater.idle()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=SECRET_KEY)
+    updater.bot.setWebhook(
+        HEROKU_APP + SECRET_KEY)
 
 if __name__ == '__main__':
     main()
