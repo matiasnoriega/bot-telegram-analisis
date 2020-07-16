@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 
 # Declaramos algunas variables necesarias para el Bot
 PORT = int(os.environ.get('PORT', 5000))
-SECRET_KEY = os.getenv("TELEGRAM_BOT_API_KEY")
-HEROKU_APP = os.getenv("HEROKU_APP")
+SECRET_KEY = os.environ('TELEGRAM_BOT_API_KEY')
+HEROKU_APP = os.environ('HEROKU_APP')
 
 # Definimos algunos comandos básicos que funcionaran como handlers.
 
