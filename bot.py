@@ -16,8 +16,8 @@ HEROKU_APP = os.environ['HEROKU_APP']
 
 # Definimos algunos comandos básicos que funcionaran como handlers.
 
-def start(update, context):
-    """Manda un mensaje cuando el usuario ingresa /start """
+def saludo(update, context):
+    """Manda un mensaje cuando el usuario ingresa /saludo """
     update.message.reply_text('Hola! Soy el BOT de Análisis Matemático! Sirvo como un ayuda-memoria para la cursada')
 
 def factoreo(update, context):
@@ -42,7 +42,8 @@ def main():
     disp = updater.dispatcher
 
     # Para cada comando en telegram se asigna un handler
-    disp.add_handler(CommandHandler("start", start))
+    disp.add_handler(CommandHandler("start", saludo))
+    disp.add_handler(CommandHandler("saludo", saludo))
     disp.add_handler(CommandHandler("ayuda", ayuda))
     disp.add_handler(CommandHandler("factoreo", factoreo))
     
