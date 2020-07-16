@@ -30,6 +30,10 @@ def ayuda(update, context):
     update.message.reply_text('Probá el comando /factoreo para recibir los casos más comunes de factoreo!')
 
 
+def error(update, context):
+    """Loggea los errores causados por el Updater."""
+    logger.warning('Update "%s" caused error "%s"', update, context.error)
+
 def main():
     """Inicia el bot."""
     # Se crea un objeto Updater pasandole el token del bot
@@ -41,6 +45,9 @@ def main():
     # Para cada comando en telegram se asigna un handler
     disp.add_handler(CommandHandler("start", start))
     disp.add_handler(CommandHandler("ayuda", ayuda))
+    
+    # loggea todos los errores
+    dp.add_error_handler(error)
 
     # Inicia el Bot
     updater.start_polling()
