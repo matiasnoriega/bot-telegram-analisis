@@ -24,3 +24,26 @@ def start(update, context):
 def ayuda(update, context):
     """Manda un mensaje cuando el usuario ingresa /ayuda """
     update.message.reply_text('Probá el comando /factoreo para recibir los casos más comunes de factoreo!')
+
+
+def main():
+    """Inicia el bot."""
+    # Se crea un objeto Updater pasandole el token del bot
+    updater = Updater(SECRET_KEY, use_context=True)
+
+    # Obtenemos el dispatcher, del updater, para poder registrar los handlers (métodos)
+    disp = updater.dispatcher
+
+    # Para cada comando en telegram se asigna un handler
+    disp.add_handler(CommandHandler("start", start))
+    disp.add_handler(CommandHandler("ayuda", ayuda))
+
+    # Inicia el Bot
+    updater.start_polling()
+
+    # Corre el bot hasta que se presione CTRL+C o el proceso reciba un SIGINT,
+    # SIGTERM o SIGABRT.
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
