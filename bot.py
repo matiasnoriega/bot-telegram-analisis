@@ -1,7 +1,3 @@
-# Modulo dotenv para usar archivo .env
-from dotenv import load_dotenv
-load_dotenv()
-
 import os
 
 import logging
@@ -22,8 +18,11 @@ HEROKU_APP = os.environ['HEROKU_APP']
 
 def start(update, context):
     """Manda un mensaje cuando el usuario ingresa /start """
-    update.message.reply_text('Hola, bienvenido al BOT de Análisis Matemático!')
+    update.message.reply_text('Hola! Soy el BOT de Análisis Matemático! Sirvo como un ayuda-memoria para la cursada')
 
+def factoreo(update, context):
+    """ Devuelve tabla de casos mas comunes de factoreo """
+    update.message.reply_photo(photo=open('assets/factoreo.png', 'rb'))
 
 def ayuda(update, context):
     """Manda un mensaje cuando el usuario ingresa /ayuda """
@@ -36,7 +35,7 @@ def error(update, context):
 
 def main():
     """Inicia el bot."""
-    # Se crea un objeto Updater pasandole el token del bot
+    # Se crea un objeto Updater pasandole el token del bota
     updater = Updater(SECRET_KEY, use_context=True)
 
     # Obtenemos el dispatcher, del updater, para poder registrar los handlers (métodos)
@@ -45,12 +44,10 @@ def main():
     # Para cada comando en telegram se asigna un handler
     disp.add_handler(CommandHandler("start", start))
     disp.add_handler(CommandHandler("ayuda", ayuda))
+    disp.add_handler(CommandHandler("factoreo", factoreo))
     
     # loggea todos los errores
-    dp.add_error_handler(error)
-
-    # Inicia el Bot
-    updater.start_polling()
+    disp.add_error_handler(error)
 
     # Corre el bot hasta que se presione CTRL+C o el proceso reciba un SIGINT,
     # SIGTERM o SIGABRT.
@@ -59,6 +56,9 @@ def main():
                           url_path=SECRET_KEY)
     updater.bot.setWebhook(
         HEROKU_APP + SECRET_KEY)
+
+    # Dejamos el bot en modo idle para que siga escuchando.
+    updater.idle()
 
 if __name__ == '__main__':
     main()
