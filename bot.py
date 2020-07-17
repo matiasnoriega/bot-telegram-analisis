@@ -28,6 +28,10 @@ def factoreo(update, context):
     """ Devuelve tabla de casos mas comunes de factoreo """
     update.message.reply_photo(photo=open('assets/factoreo.png', 'rb'))
 
+def resolvente(update, context):
+    """ Devuelve tabla de casos mas comunes de factoreo """
+    update.message.reply_photo(photo=open('assets/resolvente.png', 'rb'))
+
 def ayuda(update, context):
     """Manda un mensaje cuando el usuario ingresa /ayuda """
     update.message.reply_text('Probá el comando /factoreo para recibir los casos más comunes de factoreo o /derivar funcion para ver la derivada de f(x)!')
@@ -116,6 +120,7 @@ def main():
     disp.add_handler(CommandHandler("start", saludo))
     disp.add_handler(CommandHandler("saludo", saludo))
     disp.add_handler(CommandHandler("ayuda", ayuda))
+    disp.add_handler(CommandHandler("resolvente", resolvente))
     disp.add_handler(CommandHandler("factoreo", factoreo))
     disp.add_handler(CommandHandler("derivadas", derivadas, pass_args=True))
     disp.add_handler(CommandHandler("derivar", derivar, pass_args=True))
