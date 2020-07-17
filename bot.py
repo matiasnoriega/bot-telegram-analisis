@@ -38,7 +38,7 @@ def derivar(update, context):
     patron_funciones = {
         '^[0-9]+$': '0',
         'x$': '1',
-        '': '',
+        '^[0-9]+x$': 'kx',
     }
 
     #Tomamos el primer argumento que se le pasa al comando como función f(x)
@@ -58,6 +58,11 @@ def derivar(update, context):
 
     # Si encuentra una coincidencia usa la API de Latex2PNG
     if(resultado):
+
+        if(resultado == 'kx'):
+            r = re.compile("([0-9]+)(x)")
+            m = r.match(funcion)
+            resultado = m.group(1)
 
         # Data para mandar a la API de latex2png
         payload = "{\n\"auth\": {\n\"user\": \"guest\",\n\"password\": \"guest\"\n},\n\"latex\": \"%(latex)s\" ,\n\"resolution\": 600,\n\"color\": \"111111\"\n}"%{'latex': resultado}
