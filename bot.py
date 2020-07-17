@@ -33,8 +33,24 @@ def ayuda(update, context):
     update.message.reply_text('Probá el comando /factoreo para recibir los casos más comunes de factoreo o /derivar funcion para ver la derivada de f(x)!')
 
 def derivadas(update, context):
-    """ Retorna la tabla de derivadas """
-    update.message.reply_photo(photo=open('assets/tabla_derivadas.png', 'rb'))
+    """ Retorna casos de derivadas"""
+    if not context.args:
+        caso = None
+    else:
+        caso = context.args[0]
+
+    if caso == None:
+        update.message.reply_photo(photo=open('assets/tabla_derivadas.png', 'rb'))
+    elif caso == 'suma':
+        update.message.reply_photo(photo=open('assets/derivadas_suma.png', 'rb'))
+    elif caso == 'resta':
+        update.message.reply_photo(photo=open('assets/derivadas_resta.png', 'rb'))
+    elif caso == 'division':
+        update.message.reply_photo(photo=open('assets/derivadas_division.png', 'rb'))
+    elif caso == 'multiplicacion':
+        update.message.reply_photo(photo=open('assets/derivadas_multiplicacion.png', 'rb'))
+    else:
+        update.message.reply_text('Intenta de nuevo con alguna de las opciones: suma, resta, division o multiplicacion o vacio para la tabla de derivadas!')
 
 def derivar(update, context):
     """ Toma la función base y muestra su derivada """
@@ -101,7 +117,7 @@ def main():
     disp.add_handler(CommandHandler("saludo", saludo))
     disp.add_handler(CommandHandler("ayuda", ayuda))
     disp.add_handler(CommandHandler("factoreo", factoreo))
-    disp.add_handler(CommandHandler("derivadas", derivadas))
+    disp.add_handler(CommandHandler("derivadas", derivadas, pass_args=True))
     disp.add_handler(CommandHandler("derivar", derivar, pass_args=True))
     
     # loggea todos los errores
