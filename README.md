@@ -46,3 +46,7 @@ Si querés hacer alguna sugerencia o reportar algún problema, podés [abrir un 
 * [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 
 ## [LICENCIA](https://github.com/matiasnoriega/bot-telegram-analisis/blob/master/LICENSE)
+
+## Disclaimer
+
+El BOT está hecho por estudiantes de la universidad, no es una herramienta oficial de la misma ni de la cátedra de Análisis Matemático.

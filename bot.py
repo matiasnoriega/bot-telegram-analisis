@@ -15,14 +15,14 @@ logger = logging.getLogger(__name__)
 PORT = int(os.environ.get('PORT', 5000))
 SECRET_KEY = os.environ['TELEGRAM_BOT_API_KEY']
 HEROKU_APP = os.environ['HEROKU_APP']
-URL_API_LATEX2PNG = 'http://latex2png.com/api/convert'
-URL_BASE_LATEX2PNG = 'http://latex2png.com'
 
 # Definimos algunos comandos básicos que funcionaran como handlers.
 
 def saludo(update, context):
     """Manda un mensaje cuando el usuario ingresa /saludo """
     update.message.reply_text('Hola! Soy el BOT de Análisis Matemático! Sirvo como un ayuda-memoria para la cursada')
+    update.message.reply_text('Estoy desarrollado por estudiantes de la universidad, no soy una herramienta oficial de la misma ni de la cátedra de Análisis Matemático.')
+    update.message.reply_text('Para más información, revisá [mi repositorio en github](https://github.com/matiasnoriega/bot-telegram-analisis)', parse_mode='MarkdownV2')
 
 def factoreo(update, context):
     """ Devuelve tabla de casos mas comunes de factoreo """
